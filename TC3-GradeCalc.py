@@ -13,17 +13,99 @@
 # •	A valid letter grade can be either uppercase or lowercase.
 # •	If an invalid value is entered, display a warning message.
 
+GRADES = {"A": 4,
+          "B": 3,
+          "C": 2,
+          "D": 1,
+          "F": 0}
+MODIFIER = 0.3
 
 def main():
-    # YOUR CODE STARTS HERE, each line must be indented (one tab)
+    # Output greeting
+    greeting = "| GRADE CALCULATOR |"
+    print("-" * len(greeting))
+    print(greeting)
+    print("-" * len(greeting))
+
+    print("Let's calculate your numerical grade value based on your letter grade!\n")
+
+    grade = getString("Enter your letter grade. Valid grades include: A, B, C, D, F.\nOptional modifiers + / - are accepted and can be included right in the input.\n> ")
+    gradeValue = convertLetterGrade(grade[0])
+
+    try:
+        gradeValue += getModifier(grade[1], grade[0])
+    except:
+        gradeValue = gradeValue
+
+    if gradeValue != 99:
+        if gradeValue > 4:
+            gradeValue = 4
+        
+        print("The numeric value for your grade is {0}".format(gradeValue))
+    else:
+        print("You have entered an invalid input")
+
+def getModifier(modIndex, grade):
+    if grade.upper() != "F":
+        match modIndex:
+            case 1:
+                return -0.3
+            case 2:
+                return 0.3
+            case _:
+                return 0
+    else:
+        return 0
 
 
+def convertLetterGrade(grade):
+    match grade.upper():
+        case "A":
+            return 4
+        case "B":
+            return 3
+        case "C":
+            return 2
+        case "D":
+            return 1
+        case "F":
+            return 0
+        case _:
+            return 99
 
+def getString(outputString):
+    inputString = input(outputString)
+    grade = ""
+    modifier = 0 # 0 = no modifier; 1 = minus modifier; 2 = plus modifier
 
+    if len(inputString) == 0:
+        return "Invalid input"
 
+    match inputString[0].upper():
+        case "A":
+            grade = "A"
+        case "B":
+            grade = "B"
+        case "C":
+            grade = "C"
+        case "D":
+            grade = "D"
+        case "F":
+            grade = "F"
+        case _:
+            return "Invalid input"
 
+    # Attempts to access inputString[1], where the modifier should be located. If no modifier exists, inputString[1] won't exist and function will return 0
+    try:
+        if inputString[1] == "+":
+            return [grade, 2]
+        elif inputString[1] == "-":
+            return [grade, 1]
+    except:
+        return [grade, 0]
+        
+    return ["Invalid grade input.", 0]
+    
 
-
-    # YOUR CODE ENDS HERE
-
-main()
+if __name__ == "__main__":
+    main()
