@@ -56,9 +56,9 @@ def getModifier(modIndex, grade):
     if grade.upper() != "F":
         match modIndex:
             case 1:
-                return -0.3
+                return -MODIFIER
             case 2:
-                return 0.3
+                return MODIFIER
             case _:
                 return 0
     else:
