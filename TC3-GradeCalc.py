@@ -44,6 +44,11 @@ def main():
         print("The numeric value for your grade is {0}".format(gradeValue))
     else:
         print("You have entered an invalid input")
+        main()
+        return
+
+    if (input("Enter another grade? (Y/N)\n> ").upper() == "Y"):
+        main()
 
 def getModifier(modIndex, grade):
     if grade.upper() != "F":
