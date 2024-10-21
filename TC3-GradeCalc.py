@@ -37,6 +37,7 @@ def main():
     except:
         gradeValue = gradeValue
 
+    # a gradeValue of 99 means convertLetterGrade() has failed due to improper input
     if gradeValue != 99:
         if gradeValue > 4:
             gradeValue = 4
@@ -51,6 +52,7 @@ def main():
         main()
 
 def getModifier(modIndex, grade):
+    # If grade entered is F, skip all modification calculations
     if grade.upper() != "F":
         match modIndex:
             case 1:
@@ -62,7 +64,8 @@ def getModifier(modIndex, grade):
     else:
         return 0
 
-
+# I could have combined convertLetterGrade() and getString() with more time
+# Having two basically identical match/case blocks irks me but I don't want to get lost in the weeds on a timed exercise
 def convertLetterGrade(grade):
     match grade.upper():
         case "A":
